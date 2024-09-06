@@ -26,8 +26,10 @@ int main () {
     i++;
   }
 
+  // text doesn't have alphanumeric characters
   if (count == 0) { isEmptyString = true; }
-  
+
+  // add back null character
   strFiltered[count] = '\0';
 
   // change to lowercase
@@ -52,6 +54,7 @@ int main () {
     position++;
   }
 
+  // add back null character
   strReverse[position] = '\0';
 
   // compare string and its reverse
