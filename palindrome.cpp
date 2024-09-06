@@ -7,26 +7,28 @@ int main () {
 
   // initialize variables
   char str[80];
+  bool isEmptyString = false;
   cout << "Enter a string." << endl;
 
-  cin.get(str, 80);
+  cin.get(str, 80, '\n');
   cin.get();
 
   // removing punctuation
   char strFiltered[80];
   int count = 0;
-  for (int i = 0; i < 80; i++) {
-    if (isalnum(str[i]) != 0 && str[i] != '\0') {
+  int i = 0;
+  while (i < 80 && str[i] != '\0') {
+    if (isalnum(str[i]) != 0) {
       // is an alphanumeric character (a-z, A-Z, 0-9)
       strFiltered[count] = str[i];
       count++;
-      cout << strFiltered << " " << count << endl;
     }
+    i++;
   }
 
+  if (count == 0) { isEmptyString = true; }
+  
   strFiltered[count] = '\0';
-
-  cout << "strFiltered " << strFiltered << endl;
 
   // change to lowercase
   char strLower[80];
@@ -38,9 +40,7 @@ int main () {
       strLower[i] = strFiltered[i];
     }
   }
-
-  cout << "strLower " << strLower << endl;
-  
+ 
   // reverse string
   char strReverse[80];
   int position = 0;
@@ -49,16 +49,20 @@ int main () {
   // length of the array)
   for (int i = count - 1; i >= 0; i--) { 
     strReverse[position] = strLower[i];
+    position++;
   }
 
-  cout << "strReverse " << strReverse << endl;
+  strReverse[position] = '\0';
 
   // compare string and its reverse
-  if (strcmp(strLower, strReverse) == 0) {
+  if (strcmp(strLower, strReverse) == 0 and !isEmptyString) {
     cout << "Palindrome." << endl;
   }
-  else {
+  else if (!isEmptyString) {
     cout << "Not a palindrome." << endl;
+  }
+  else {
+    cout << "String is empty or doesn't have alphanumeric characters." << endl;
   }
   
   return 0;
